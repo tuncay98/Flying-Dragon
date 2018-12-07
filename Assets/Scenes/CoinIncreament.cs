@@ -38,6 +38,13 @@ public class CoinIncreament : MonoBehaviour {
         if (collision.gameObject.tag == "barrier") {
             PlayerPrefs.SetInt("now", sayi);
 
+            if (!PlayerPrefs.HasKey("Coins"))
+                PlayerPrefs.SetInt("Coins", sayi);
+            else {
+                var get = PlayerPrefs.GetInt("Coins");
+                PlayerPrefs.SetInt("Coins", sayi + get);
+            }
+
             if (!PlayerPrefs.HasKey("HighCoin")) {
                 PlayerPrefs.SetInt("HighCoin", sayi);
             }
