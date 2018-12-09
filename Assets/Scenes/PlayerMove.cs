@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     private Vector2 startPos;
     private Vector2 direction;
     private bool directionChosen;
-    public float speed = 100f;
+    public float speed = 16f;
     public GameObject player;
     public Camera camera1;
     float height;

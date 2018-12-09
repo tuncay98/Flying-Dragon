@@ -13,14 +13,26 @@ public class Main_Menu : MonoBehaviour {
     public Button low;
     public Text SoundText;
     public Text TotalCoins;
+    private BannerView bannerView;
     private void Start()
     {
-        TotalCoin();
-        Hide();
-        if(AudioListener.pause)
-            SoundText.text = "Sound: OFF";
-        else
-            SoundText.text = "Sound: On";
+        if(SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            TotalCoin();
+            Hide();
+            if (AudioListener.pause)
+                SoundText.text = "Sound: OFF";
+            else
+                SoundText.text = "Sound: On";
+
+            string appId = "ca-app-pub-6448871441563979~1039328394";
+
+            MobileAds.Initialize(appId);
+
+            this.RequestBanner();
+        }
+
+
     }
 
     public void Hide()
@@ -101,5 +113,15 @@ public class Main_Menu : MonoBehaviour {
         }
         else
             TotalCoins.text = "0";
+    }
+
+    private void RequestBanner()
+    {
+
+        string adUnitId = "ca-app-pub-6448871441563979/9671515319";
+
+
+        // Create a 320x50 banner at the top of the screen.
+        bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom);
     }
 }

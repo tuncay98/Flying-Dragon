@@ -52,6 +52,7 @@ public class Sound : MonoBehaviour {
     {
         if (name == "coin") {
             source.PlayOneShot(coin);
+           
         }
         if (name == "mainmenu")
         {
@@ -60,7 +61,9 @@ public class Sound : MonoBehaviour {
         }
         if (name == "back")
         {
-            source.PlayOneShot(back);
+            source.clip = back;
+            source.loop = true;
+            source.Play();
 
         }
     }
