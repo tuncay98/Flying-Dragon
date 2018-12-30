@@ -13,7 +13,7 @@ public class TopBoxMove : MonoBehaviour
     public Camera camera1;
 
 
-    private List<GameObject> list = new List<GameObject>();
+    public List<GameObject> listTop = new List<GameObject>();
 
     // Use this for initialization
     void Start()
@@ -27,7 +27,7 @@ public class TopBoxMove : MonoBehaviour
     {
 
 
-        foreach (var item in list)
+        foreach (var item in listTop)
         {
             if (item != null)
             {
@@ -43,9 +43,9 @@ public class TopBoxMove : MonoBehaviour
 
         Quaternion rotation = Quaternion.Euler(180, 0, 0);
 
-        GameObject topadding = Instantiate(box, new Vector3(camera1.transform.position.x + 5f, camera1.transform.position.y + UnityEngine.Random.Range(2.9f, 4.0f), 0), rotation) as GameObject;
+        GameObject topadding = Instantiate(box, new Vector3(camera1.transform.position.x + 5f, camera1.transform.position.y + Random.TopRandom , 0), rotation) as GameObject;
 
-        list.Add(topadding);
+        listTop.Add(topadding);
 
         Destroy(topadding, 5);
 

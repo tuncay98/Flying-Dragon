@@ -15,6 +15,7 @@ public class CoinIncreament : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Sound.Play("back");
+        
         text.text = "Score: "+sayi;
         //endbox.GetComponent<Renderer>().enabled = false;
         endbox.SetActive(false);
@@ -37,7 +38,8 @@ public class CoinIncreament : MonoBehaviour {
         }
         if (collision.gameObject.tag == "barrier") {
             PlayerPrefs.SetInt("now", sayi);
-
+            Sound.Stop();
+            Sound.Play("gameover");
             if (!PlayerPrefs.HasKey("Coins"))
                 PlayerPrefs.SetInt("Coins", sayi);
             else {

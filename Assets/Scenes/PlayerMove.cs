@@ -15,8 +15,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
-        string appId = "ca-app-pub-6448871441563979~1039328394";
-        MobileAds.Initialize(appId);
+
         RequestInterstitial();
         height = 2f * camera1.orthographicSize;
         

@@ -9,6 +9,7 @@ public class Sound : MonoBehaviour {
     public static AudioClip coin;
     public static AudioClip menu;
     public static AudioClip back;
+    public static AudioClip gameover;
 
     static AudioSource source;
 
@@ -35,6 +36,7 @@ public class Sound : MonoBehaviour {
 
         menu = Resources.Load<AudioClip>("mainmenu");
 
+        gameover = Resources.Load<AudioClip>("gameover");
 
         source = GetComponent<AudioSource>();
 
@@ -65,6 +67,10 @@ public class Sound : MonoBehaviour {
             source.loop = true;
             source.Play();
 
+        }
+        if(name == "gameover")
+        {
+            source.PlayOneShot(gameover);
         }
     }
     public static void Stop()

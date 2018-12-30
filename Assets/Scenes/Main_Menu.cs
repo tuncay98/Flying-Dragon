@@ -13,23 +13,40 @@ public class Main_Menu : MonoBehaviour {
     public Button low;
     public Text SoundText;
     public Text TotalCoins;
-    private BannerView bannerView;
+    public Button Buy;
+    public Button SelectBird;
+    public GameObject Store;
+    public Text NEM;
     private void Start()
     {
         if(SceneManager.GetActiveScene().name == "MainMenu")
         {
             TotalCoin();
             Hide();
+            HideStore();
+            NEM.gameObject.SetActive(false);
             if (AudioListener.pause)
                 SoundText.text = "Sound: OFF";
             else
                 SoundText.text = "Sound: On";
 
-            string appId = "ca-app-pub-6448871441563979~1039328394";
+            if (PlayerPrefs.HasKey("BirdBuyed"))
+            {
+                Buy.gameObject.SetActive(false);
+                SelectBird.gameObject.SetActive(true);
+            }
+            else
+            {
+                Buy.gameObject.SetActive(true);
+                SelectBird.gameObject.SetActive(false);
+            }
 
-            MobileAds.Initialize(appId);
+            if (!PlayerPrefs.HasKey("Player"))
+            {
+                PlayerPrefs.SetString("Player", "Dragon");
+            }
 
-            this.RequestBanner();
+
         }
 
 
@@ -46,6 +63,14 @@ public class Main_Menu : MonoBehaviour {
         high.gameObject.SetActive(true);
         middle.gameObject.SetActive(true);
         low.gameObject.SetActive(true);
+    }
+    public void HideStore()
+    {
+        Store.SetActive(false);
+    }
+    public void UnhideStore()
+    {
+        Store.SetActive(true);
     }
     public void SetQuality(int index)
     {
@@ -110,18 +135,44 @@ public class Main_Menu : MonoBehaviour {
         {
             var getcoins = PlayerPrefs.GetInt("Coins");
             TotalCoins.text = getcoins.ToString();
+
         }
         else
             TotalCoins.text = "0";
     }
 
-    private void RequestBanner()
+    public void BuyBtn()
     {
-
-        string adUnitId = "ca-app-pub-6448871441563979/9671515319";
-
-
-        // Create a 320x50 banner at the top of the screen.
-        bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom);
+        if (PlayerPrefs.HasKey("Coins"))
+        {
+            var Coin = PlayerPrefs.GetInt("Coins");
+            if (Coin > 10000)
+            {
+                Coin =- 10000;
+                TotalCoins.text = Coin.ToString();
+                PlayerPrefs.SetInt("BirdBuyed", 1);
+                PlayerPrefs.SetInt("Coins", Coin);
+                Buy.gameObject.SetActive(false);
+                SelectBird.gameObject.SetActive(true);
+            }
+            else
+                NEM.gameObject.SetActive(true);
+        }
     }
+
+    public void SelectBirdBtn()
+    {
+        PlayerPrefs.SetString("Player", "Bird");
+        HideStore();
+    }
+
+    public void SelectDragonBtn()
+    {
+        PlayerPrefs.SetString("Player", "Dragon");
+        NEM.gameObject.SetActive(false);
+        HideStore();
+
+    }
+
+
 }

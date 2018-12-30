@@ -14,7 +14,7 @@ public class Coins : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        InvokeRepeating("GenerateCoin", 2.5f, 2.5f);
+        InvokeRepeating("GenerateCoin", 2.0f, 2.5f);
 
     }
 	
